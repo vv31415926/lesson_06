@@ -17,14 +17,22 @@ def menu():
             break
     return int(n)
 #------------------------------------------------------
-def newDir( ):
+def inNewDir( ):
     s = input(  'Введите имя новой папки: ')
-    p = os.path.join( os.getcwd(), s )
-    if not os.path.exists(p):
-        os.mkdir( p )
+    if not os.path.exists(s):
+        if not newDir( s ):
+            print( 'Папка не создана.')
     else:
         print( 'такой файл/папка уже есть')
-    return p
+
+
+def newDir( name ):
+    os.mkdir( name )
+    if name in os.listdir():
+        return True
+    else:
+        return False
+
 #------------------------------------------------------
 def delDir( ):
     s = input(  'Введите имя папки для удаления: ')
@@ -84,7 +92,7 @@ def infoMy():
     print('----------------')
 #------------------------------------------------------
 def chDir():
-x    n = 1
+    n = 1
     while n == 1:
         src = input('Введите путь на новую директорию: ')
         if not os.path.isabs(src):
